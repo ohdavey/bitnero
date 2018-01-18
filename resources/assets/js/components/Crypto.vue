@@ -16,7 +16,9 @@
                 <td>{{ crypto.name }}</td>
                 <td>${{ formatPrice(crypto.price_usd) }}</td>
                 <td>${{ formatPrice(crypto["24h_volume_usd"]) }}</td>
-                <td>{{ crypto.percent_change_24h }}%</td>
+                <td v-bind:class="[crypto.percent_change_24h < 0 ? 
+                'text-danger' : '', 'text-success']">{{
+                    crypto.percent_change_24h }}%</td>
                 <td>{{ formatDate(crypto.last_updated) }}</td>
             </tr>
         </tbody>
@@ -49,6 +51,9 @@
             formatPrice(value) {
                 let val = (value/1).toFixed(0).replace(',', '.');
                 return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            },
+            formatDate(update_time) {
+                return moment.unix(update_time).format("MM-DD-YYYY | hh:mm:ss");
             },
             formatDate(update_time) {
                 return moment.unix(update_time).format("MM-DD-YYYY | hh:mm:ss");
