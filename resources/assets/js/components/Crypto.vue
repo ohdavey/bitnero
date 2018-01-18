@@ -6,7 +6,10 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Volume</th>
-                <th>Change (24h)</th>
+                <th>24h
+                    <i class="fa fa-caret-up" aria-hidden="true"></i>
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </th>
                 <th>Last Update</th>
             </tr>
         </thead>
@@ -16,7 +19,7 @@
                 <td>{{ crypto.name }}</td>
                 <td>${{ formatPrice(crypto.price_usd) }}</td>
                 <td>${{ formatPrice(crypto["24h_volume_usd"]) }}</td>
-                <td v-bind:class="[crypto.percent_change_24h < 0 ? 
+                <td v-bind:class="[crypto.percent_change_24h < 0 ?
                 'text-danger' : '', 'text-success']">{{
                     crypto.percent_change_24h }}%</td>
                 <td>{{ formatDate(crypto.last_updated) }}</td>
