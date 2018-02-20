@@ -59261,6 +59261,13 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
 //
 //
 //
@@ -59299,7 +59306,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(this.cryptos);
     },
 
-    methods: {
+    methods: _defineProperty({
         getCryptos: function getCryptos() {
             var _this = this;
 
@@ -59320,7 +59327,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         formatDate: function formatDate(update_time) {
             return __WEBPACK_IMPORTED_MODULE_0_moment___default.a.unix(update_time).format("MM-DD-YYYY | hh:mm:ss");
         }
-    }
+    }, 'formatDate', function formatDate(update_time) {
+        return __WEBPACK_IMPORTED_MODULE_0_moment___default.a.unix(update_time).format("MM-DD-YYYY | hh:mm:ss");
+    })
 });
 
 /***/ }),
@@ -59608,7 +59617,16 @@ var render = function() {
             _vm._v("$" + _vm._s(_vm.formatPrice(crypto["24h_volume_usd"])))
           ]),
           _vm._v(" "),
-          _c("td", [_vm._v(_vm._s(crypto.percent_change_24h) + "%")]),
+          _c(
+            "td",
+            {
+              class: [
+                crypto.percent_change_24h < 0 ? "text-danger" : "",
+                "text-success"
+              ]
+            },
+            [_vm._v(_vm._s(crypto.percent_change_24h) + "%")]
+          ),
           _vm._v(" "),
           _c("td", [_vm._v(_vm._s(_vm.formatDate(crypto.last_updated)))])
         ])
@@ -59631,7 +59649,18 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Volume")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Change (24h)")]),
+        _c("th", [
+          _vm._v("24h\n                "),
+          _c("i", {
+            staticClass: "fa fa-caret-up",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" "),
+          _c("i", {
+            staticClass: "fa fa-caret-down",
+            attrs: { "aria-hidden": "true" }
+          })
+        ]),
         _vm._v(" "),
         _c("th", [_vm._v("Last Update")])
       ])
